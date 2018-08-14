@@ -57,7 +57,7 @@ for i = 1:N
             error_RLS(k) = output(k) - hattheta(k-1)*regressor(k-1);
             K(k) = P{k-1}*regressor(k-1)/(forgettingfactor + regressor(k-1)'*P{k-1}*regressor(k-1));
             if (abs(error_RLS(k)))<2  % error based 
-                P{k} = forgettingfactor^(-1)*P{k-1}-K(k)*regressor(k-1)'*forgettingfactor^(-1)*P{k-1};
+                P{k} = forgettingfactor^(-1)*P{k-1}-K(k)*regressor(k-1)'*forgettingfactor^(-1)*P{k-1} + 1000*abs(error_RLS(k)) +0*(hatd(k-1))^2+0*(hatx(k-1) - x_measure(k))^2;
             else
                 P{k} = 1000;
             end
